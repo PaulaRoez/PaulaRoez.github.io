@@ -1,15 +1,2145 @@
 #
 # This file contains configuration flags to customize your site
 #
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-# Name of your site (displayed in the header)
-name: Paula Rodríguez
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-# Short bio or description (displayed in the header)
-description: Periodista
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <title>Paula Rodríguez Chávez</title>
+
+    <link rel="icon" href="avion.gif">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+        
+        /*===== SHOW MENU "TOGGLE BUTTON" =====*/
+const showMenu= (toggleId, navId) =>{
+  const toggle= document.getElementById(toggleId),
+  nav=document.getElementById(navId)
+
+
+if(nav && toggle){
+    toggle.addEventListener("click", ()=>{
+        nav.classList.toggle('show--menu')
+    })
+}
+}
+showMenu("nav-toggle","nav-menu");
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*===== REMOVE MENU MOBILE AFTER CLICK ON THE LINK =====*/
+const navLink =document.querySelectorAll(".nav__link");
+const linkAction= ()=>{
+    const navMenu=document.getElementById("nav-menu")
+    navMenu.classList.remove("show--menu")
+}
+navLink.forEach( ev => ev.addEventListener("click", linkAction));
+////////////////////////////////////////////////////////////////////////////////
+
+
+/*===== SCROLL SECTIONS ACTIVE LINK =====*/
+//querySelector => returns a single object with the first HTML element that matches the 'selectors'. If no matching node is found, null is returned
+//querySelectorAll => returns an array/NodeList of objects with all the HTML elements that match the 'selectors' or an empty NodeList if no matches are found.
+
+
+
+function onScroll(event){
+  var sections = document.querySelectorAll('#nav-menu a');
+  var scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+  
+  for( var i = 0; i < sections.length; i++ ){
+    var currLink = sections[i]; 
+    var val = currLink.getAttribute('href');
+    var refElement = document.querySelector(val);
+      if( refElement.offsetTop <= scrollPos && ( refElement.offsetTop + refElement.offsetHeight > scrollPos)){
+        document.querySelector('#nav-menu ul li a').classList.remove('active--link');
+        currLink.classList.add('active--link');
+      }else{
+         currLink.classList.remove('active--link');
+       }
+  }
+  
+  
+                                                           
+    
+};
+
+window.document.addEventListener('scroll', onScroll );
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*===== CHANGE BACKGROUND HEADER =====*/ 
+const scrollHeader= ()=>{
+    const header=document.getElementById("header");
+    if(this.scrollY >=200) {header.classList.add('scroll--header')}
+    else{
+        header.classList.remove('scroll--header')
+    }
+}
+window.addEventListener("scroll",scrollHeader)
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*===== SHOW SCROLL TOP =====*/ 
+const scrollTop= ()=>{
+  const scrollTop=document.getElementById("scroll-top");
+  if(this.scrollY >=560) {scrollTop.classList.add('show--scroll')}
+  else{
+    scrollTop.classList.remove('show--scroll')
+  }
+}
+window.addEventListener("scroll",scrollTop)
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*===== MIXITUP FILTER PORTFOLIO =====*/ 
+var containerEl = document.querySelector('.portfolio__container');
+if (containerEl){
+const mixer = mixitup('.portfolio__container', {
+  selectors: {
+      target: '.portfolio__content'
+  },
+  animation: {
+      duration: 400
+  }
+});
+}
+/* Link active portfolio */ 
+var numberButtons = document.querySelectorAll(".portfolio__item")
+for (var i = 0; i < numberButtons.length; i++) {
+  numberButtons[i].addEventListener("click", changeButton.bind(null, i));
+}
+
+function changeButton(selected, e) {
+  var oldActive = document.getElementsByClassName("active--portfolio");
+  for (var i = 0; i < oldActive.length; i++) {
+    oldActive[i].classList.remove("active--portfolio");
+  }
+  e.target.classList.add("active--portfolio");
+}
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*===== SWIPER CAROUSEL =====*/ 
+const mySwiper = new Swiper('.reviews__container ', {
+  // Optional parameters
+  spaceBetween:16,
+  loop: true,
+  grabCursor:true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+    clickable:true,
+  },
+  breakpoints:{
+    640:{
+      slidesPerView:2,
+    },
+    1024:{
+      slidesPerView:3,
+    },
+  }
+ 
+})
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*===== GSAP ANIMATION =====*/ 
+gsap.from(".home__img", {opacity:0,duraction:2, delay:0.2, x:60})
+gsap.from(".home__data", {opacity:0,duraction:2, delay:0.8, y:25})
+gsap.from(".home__greeting, .home__name, .home__professional , .home__button", {opacity:0,duraction:2, delay:1, y:25, ease:'expo.out', stagger:.2})
+gsap.from(".nav__logo, .nav__toggle", {opacity:0,duraction:2, delay:1.5, y:25, ease:'expo.out', stagger:.2})
+gsap.from(".nav__item", {opacity:0,duraction:2, delay:1.8, y:25, ease:'expo.out', stagger:.2})
+gsap.from(".home__social-icon", {opacity:0,duraction:2, delay:2.3, y:25, ease:'expo.out', stagger:.2})
+    </script>
+<script type="text/javascript">
+$(window).load(function() {
+    $(".loader").fadeOut("slow");
+}); 
+</script>
+
+     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- ===== Fontawsome ICONS ===== -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+        
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="style/main.css">
+
+        <title>Paula Rodríguez Chávez</title>
+    <style type="text/css">
+        
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root{
+  --header-height: 3rem;
+
+  /*===== Colors =====*/
+  --first-color: #3E0E12;
+  --first-color-dark: #2F0A0D;
+  --text-color: #524748;
+  --first-color-light: #7B6F71;
+  --first-color-lighten: #FBF9F9;
+
+  /*===== Font and typography =====*/
+  --body-font: 'Poppins', sans-serif;
+  --biggest-font-size: 2.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1.125rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+
+  /*===== Font weight =====*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+
+  /*===== Margenes =====*/
+  --mb-1: .5rem;
+  --mb-2: 1rem;
+  --mb-3: 1.5rem;
+  --mb-4: 2rem;
+  --mb-5: 2.5rem;
+  --mb-6: 3rem;
+
+  /*===== z index =====*/
+  --z-normal: 1;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+  
+@media screen and (min-width: 768px){
+  :root{
+    --biggest-font-size: 4.5rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+/*===== BASE =====*/
+*,::before,::after{
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: var(--header-height) 0 0 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-medium);
+  background-color: var(--first-color-lighten);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+h1,h2,h3,ul,p{
+  margin: 0;
+}
+
+h1,h2,h3{
+  font-weight: var(--font-semi-bold);
+}
+
+ul{
+  padding: 0;
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*===== CLASS CSS =====*/
+
+* {
+  cursor: url('https://i.imgur.com/6wmyrkK.gif'),auto;
+}
+
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('images/pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+}
+.carga {
+    font-style: montserrat sans-serif;
+    text-align: center;
+    margin-top: 230px;
+}
+.section{
+    padding: 4rem 0 2rem 0;
+}
+.section-title, .section-subtitle{
+    text-align: center;
+}
+.section-title{
+    font-size: var(--h1-font-size);
+    color: var(--first-color);
+    margin-bottom: var(--mb-3);
+}
+
+.section-subtitle{
+    display: block;
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-semi-bold);
+}
+/*===== LAYOUT =====*/
+.bd-container{
+    max-width: 1024px;
+    width: calc(100% - 2rem);
+    margin-left: var(--mb-2);
+    margin-right: var(--mb-2);
+}
+.bd-grid{
+    display:grid;
+    gap:1.5rem;
+
+}
+.l-header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-fixed);
+    background-color: #000;
+}
+
+/*===== NAV =====*/
+.nav{
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media screen and (max-width: 768px){
+    .nav__menu{
+        position: fixed;
+        top:-100%;
+        left: 0;
+        width: 100%;
+        padding-top: 1.5rem;
+        text-align: center;
+        background-color: #000;
+        transition: 0.4s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 0 0 1rem 1rem;
+    }
+}
+
+.nav__item{
+    margin-bottom: var(--mb-3);
+}
+
+.nav__link{
+    color: var(--first-color-lighten);
+    transition: 0.3s;
+}
+.nav__link:hover{
+    color:var(--first-color-light);
+
+}
+.nav__logo, .nav__toggle{
+    color: var(--first-color-lighten);
+}
+.nav__toggle{
+    font-size: 1.3rem;
+    cursor: pointer;
+
+
+}
+.navbar-nav {
+
+       
+        left: 0;
+        width: 100%;
+        padding-top: 1.5rem;
+        text-align: center;
+        background-color: #000;
+        transition: 0.4s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 0 0 1rem 1rem;
+         background-color: var(--first-color-lighten);
+}
+
+/* Show menu */
+.show--menu{
+  top:var(--header-height);
+}
+
+/* Active menu */
+.active--link{
+    position: relative;
+
+}
+.active--link::after{
+  content: " ";
+  position: absolute;
+  bottom: -0.7rem;
+  left: 0;
+  width: 100%;
+  text-align:center;
+  height: 3px;
+  background-color: var(--first-color-light);
+
+}
+
+/* Change background header */
+.scroll--header{
+    background-color: var(--first-color-lighten);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.scroll--header .nav__logo, .scroll--header .nav__toggle, .scroll--header .nav__link{
+ color: var(--first-color-dark);
+}
+.scroll--header .nav__menu{
+    background-color: var(--first-color-lighten);
+}
+
+/*===== SCROLL TOP =====*/
+.scrolltop{
+  position: fixed;
+  right:1rem;
+  bottom:-20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: rgba(123,111,113,0.7);
+  border-radius: 0.5rem;
+  z-index: var(--z-tooltip);
+  transition: 0.4s;
+  visibility: hidden;
+}
+
+.scrolltop:hover{
+  background-color: var(--first-color);
+}
+
+.scrolltop__icon{
+  font-size: 2rem;
+  color: var(--first-color-lighten);
+}
+/* Show scroll top */
+.show--scroll{
+  visibility: visible;
+  bottom: 1.5rem;
+
+}
+
+/*===== HOME =====*/
+.home{
+  background-color: #0F0909;
+  overflow: hidden;
+  
+}
+.home__container{
+  position: relative;
+  height: calc(100vh- var(--header-height));
+  grid-template-rows: repeat(2,max-content);
+  align-content: space-around;
+  row-gap: 2rem;
+
+}
+.home__data{
+  border-left: 4px solid var(--first-color-lighten);
+  color: var(--first-color-lighten);
+  padding-left: 1.5rem;
+  z-index: var(--z-tooltip);
+}
+.home__name{
+  font-size: var(--biggest-font-size);
+}
+.home__greeting, .home__professional{
+ display:block;
+ font-weight: var(--font-bold);
+}
+.home__greeting{
+  font-size: .812rem;
+}
+.home__professional{
+ font-size: .940rem;
+ margin-bottom: var(--mb-3);
+}
+.home__img{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+}
+.home__img img{
+  width: 100%;
+
+
+}
+.home__social{
+ display:flex;
+ flex-direction: column;
+ z-index: var(--z-normal);
+}
+.home__social-icon{
+  width:max-content;
+  font-size: 1.3rem;
+  margin-bottom: var(--mb-2);
+  color: var(--first-color-lighten);
+}
+.home__social-icon:hover{
+  color: var(--first-color-light);
+}
+/*BUTTONS*/
+.button{
+  display:inline-block;
+  background-color: var(--first-color);
+  color: var(--first-color-lighten);
+  padding:0.75rem 1rem;
+  border-radius: 0.25rem;
+  transition: 0.3s;
+}
+.button:hover {
+  background-color: var(--first-color-dark);
+
+}
+.button-light{
+  background-color: var(--first-color-light);
+}
+
+.button-white{
+  background-color: var(--first-color-lighten);
+  color: var(--first-color-dark);
+}
+.button-white:hover{
+  background-color: var(--first-color-light);
+  color:#000;
+}
+
+.button-link{
+ background: none;
+ color: var(--first-color);
+ padding:0;
+}
+.button-link:hover{
+  background: none;
+}
+/*===== ABOUT =====*/
+.about__data{
+text-align: center;
+}
+.about__desc span{
+font-size: var(--h2-font-size);
+font-weight: var(--font-semi-bold);
+color: var(--first-color);
+}
+.about__number{
+ font-size: var(--h1-font-size);
+ color: var(--first-color);
+ display: block;
+}
+
+.about__img{
+  justify-self: center;
+  width: 220px;
+  border-radius: 0.5rem;
+}
+
+/*===== QUALIFICATION =====*/
+.quali__container{
+ row-gap: 2.5rem;
+}
+.quali__title{
+  font-size: var(--h3-font-size);
+  color: var(--first-color);
+  margin-bottom: var(--mb-2);
+  display:flex;
+  align-items: center;
+}
+.quali__title-icon{
+  font-size: 1.5rem;
+  margin-right: var(--mb-1);
+}
+.quali__box{
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.quali__area{
+  font-size: var(--normal-font-size);
+  color:var(--first-color);
+  margin-bottom: var(--mb-1);
+  font-weight: var(--font-medium);
+}
+
+.quali__icon, .quali__work{
+  font-size: var(--smaller-font-size);
+  color:var(--first-color-light);
+}
+.quali__work{
+  display: block;
+
+}
+/*===== SERVICES =====*/
+.services__data{
+ padding:3rem 1rem;
+ background-color: #fff;
+ border-radius: 0.5rem;
+ text-align: center;
+ transition: 0.2s;
+ box-shadow: 0 4px 6px rgba(174,190,205,0.3);
+}
+.services__icon, .services__title{
+ margin-bottom: var(--mb-2);
+ color: var(--first-color);
+}
+
+.services__icon{
+font-size: 3rem;
+}
+.services__title{
+ font-size: var(--h3-font-size);
+}
+
+.services__desc{
+  margin-bottom: var(--mb-4);
+}
+
+.services__data:hover{
+  transform: translateY(-.5rem);
+  box-shadow: 0 6px 8px rgba(174,190,205,0.5);
+}
+
+/*===== PROJECT IN MIND =====*/
+.project__data{
+ text-align: center;
+}
+.project__container{
+  padding:1.5rem 1rem;
+  background-color: var(--first-color-dark);
+  color: var(--first-color-lighten);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+.project__icon, .project__title{
+  margin-bottom: var(--mb-1);
+}
+
+.project__icon{
+ font-size: 3.5rem;
+}
+.project__title{
+  font-size: 1.5rem;
+}
+.project__desc{
+  margin-bottom: var(--mb-4);
+}
+
+/*===== PORTFOLIO =====*/
+.portfolio__nav{
+  text-align: center;
+  margin-bottom: var(--mb-3);
+}
+.portfolio__item{
+  margin:0 var(--mb-2);
+  cursor: pointer;
+
+}
+.portfolio__content{
+  background-color: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(174,190,205,0.3);
+
+}
+.portfolio__content:hover{
+  box-shadow: 0 6px 8px rgba(174,190,205,0.5);
+}
+.portfolio__content:hover , .portfolio__img{
+  transform: scale(1.02);
+}
+.portfolio__img{
+  width: 100%;
+  transition: 0.4s;
+}
+.portfolio__data{
+ padding:1.5rem;
+}
+.portfolio__subtitle{
+  font-size: var(--small-font-size);
+  color: var(--first-color-light);
+}
+.portfolio__title{
+  font-size: var(--h3-font-size);
+  color: var(--first-color);
+  margin: var(--mb-2) 0 ;
+}
+/* Active menu portfolio*/
+.active--portfolio{
+  color:var(--first-color-dark);
+  font-weight: var(--font-semi-bold);
+}
+/*===== TESTIMONIAL =====*/
+.reviews__content{
+  display: grid;
+  background-color: var(--first-color-dark);
+  color: var(--first-color-lighten);
+  border-radius: 0.5rem;
+  padding:2rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(47,10,13,0.25);
+}
+.reviews__img{
+  width: 80px;
+  height: 80px;
+  margin:auto;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--mb-1);
+}
+.reviews__client{
+  font-size: var(--small-font-size);
+  color: var(--first-color-light);
+  margin-bottom: var(--mb-2);
+}
+.swiper-pagination{
+ position:initial;
+}
+.swiper-pagination-bullet-active{
+ background-color: var(--first-color);
+}
+
+/*===== FOOTER =====*/
+.footer{
+  background-color: var(--first-color-dark);
+  color: var(--first-color-lighten);
+  text-align: center;
+}
+.footer__container{
+  padding:3rem 0;
+}
+.footer__title{
+  font-size: var(--h1-font-size);
+  margin-bottom: var(--mb-1);
+  font-weight: var(--font-semi-bold);
+}
+.footer__desc{
+margin-bottom: var(--mb-3);
+}
+.footer__social{
+  margin-bottom: var(--mb-6);
+  margin-left: 43.1%;
+}
+.footer__link{
+  font-size: 1.4rem;
+  color: var(--first-color-lighten);
+  margin: 0 var(--mb-1);
+  transition: 0.35s;
+}
+.footer__link:hover{
+color: var(--first-color-light);
+}
+.footer__copy{
+  font-size: var(--smaller-font-size);
+  color: var(--first-color-light);
+}
+#welcome-section{
+  height:100vh;
+}
+/*===== MEDIA QUERIES =====*/
+@media screen and (min-width: 576px){
+.home__img img{
+ width: 800px;
+}
+.about__container, .services__container, .portfolio__container{
+  grid-template-columns: repeat(2,1fr);
+}
+.quali__container{
+  width: 75%;
+  margin: auto;
+}
+.contact__form{
+  width: 450px;
+  justify-self: center;
+}
+
+
+}
+
+@media screen and (min-width: 760px){
+ 
+.quali__container{
+  grid-template-columns: repeat(2,1fr);
+  width: 100%;
+}
+.home__data{
+  padding-top: 1.5rem;
+}
+}
+
+@media screen and (min-width: 769px){
+  body{
+    margin:0;
+  }
+  .section{
+    padding-top: 6rem;
+  }
+  .section-title{
+    margin-bottom: var(--mb-5);
+  }
+ 
+  /*.nav{
+    height: calc(var(--header-height)+1.5rem);
+  }*/
+  .nav__list{
+    display:flex;
+  }
+  .nav__item{
+    margin-left: var(--mb-5);
+    margin-bottom: 0;
+  }
+  .nav__toggle{
+    display: none;
+  }
+ .home__container{
+   height: 100vh;
+   grid-template-rows: max-content .5fr;
+   align-content: flex-end;
+ }
+ .home__greeting{
+   font-size: 1.25rem;
+ }
+ .home__professional{
+   font-size: 2rem;
+ }
+ .home__social{
+   flex-direction: row;
+   align-items: center;
+ }
+ .home__social-icon{
+   margin-right: var(--mb-4);
+   margin-bottom: 0;
+ }
+ .home__img img{
+   width: 440px;
+ }
+ .about__desc{
+   text-align: initial;
+ }
+ .about__img{
+   width: 300px;
+ }
+ .services__container{
+   grid-template-columns: repeat(2,1fr);
+ }
+ .portfolio__container{
+  grid-template-columns: repeat(3,1fr); 
+ }
+ .project__container{
+   padding:4.5rem 0;
+ }
+ .project__data{
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+ }
+ .project__icon, .project__title, .project__desc{
+   margin-bottom: 0;
+ }
+ .project__icon{
+   font-size: 6rem;
+ }
+ .project__title{
+  font-size: 2.5rem;
+ }
+ /*.quali__box{
+   display: flex;
+   justify-content: space-between;
+   }*/
+}
+
+@media screen and (min-width: 1024px){
+ .bd-container{
+   margin-left: auto;
+   margin-right: auto;
+ }
+ .quali__container{
+   column-gap: 6rem;
+ }
+ .swiper-pagination{
+  display: none;
+ }
+}
+
+:root {
+  --color-one: #34D1D1;
+  --color-two: #2F2235;
+  --color-three: #3F3244;
+  --color-four: #F2F2F2;
+  --color-five: #D1D2D3;
+  --color-six: #666666;
+  --color-seven: #000000;
+  --color-eight: #ffffff;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.accordion {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  width: 100%;
+}
+
+.accordion__content {
+  order: 1;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.accordion__label {
+  display: block;
+  cursor: pointer;
+  flex-grow: 1;
+  text-align: center;
+  padding: 1% 5% 1% 5%;
+  background-color: var(--color-four);
+  margin-right: 1px;
+  border-bottom: 1px solid var(--color-five);
+}
+
+.accordion__radio {
+  display: none;
+}
+
+.accordion input[type="radio"] {
+    display: none;
+}
+
+.accordion input[type="radio"] + label {
+   color: var(--color-six);
+   z-index: 1;
+}
+
+.accordion input[type="radio"]:checked + label {
+  background-color: white;
+  font-weight: 600;
+  border-top: 1px solid var(--color-five);
+  border-left: 1px solid var(--color-five);
+  border-right: 1px solid var(--color-five);
+  border-bottom: none;
+}
+.accordion input[type="radio"]:checked + label + .accordion__content {
+    display: flex;
+  margin-right: 0;
+  border-left: 1px solid var(--color-five);
+  border-right: 1px solid var(--color-five);
+  border-bottom: 1px solid var(--color-five);
+}
+
+.accordion__content__image__container {
+  width: 40%;
+  height: 100%;
+  margin-right: 10px;
+}
+.accordion__content__image__containerdos {
+  width: 50%;
+  height: 100%;
+  margin-right: 10px;
+}
+.accordion__content__image {
+  max-width: 100%;
+  max-height: 88%;
+  margin: 3%;
+  background-color: teal;
+}
+.accordion__content__imagemar {
+  max-width: 100%;
+  max-height: 88%;
+  margin: 35px;
+  background-color: teal;
+  margin-top: 5%;
+  margin-bottom: 0;
+
+}
+.accordion__content__imagemardos {
+  max-width: 100%;
+  max-height: 88%;
+  margin: 3%;
+  background-color: teal;
+}
+
+.accordion__content__text {
+ 
+  margin-top: 1%;
+  margin-left: 40px;
+   margin-right: 40px;
+}
+
+.accordion__content__textdos {
+ 
+  margin-top: 1%;
+  margin-left: 40px;
+   margin-right: 40px;
+   width: 75%;
+}
+
+.accordion__content__textcuatro {
+ 
+  margin-top: 1%;
+  margin-left: 40px;
+   margin-right: 40px;
+   width: 50%;
+}
+.accordion__content__text__title {
+  margin-top: 3%;
+}
+.accordion__content__text__titlemar {
+    margin-top: 15px;
+  margin-left: 40px;
+}
+
+@media screen and (max-width: 600px) {
+  .accordion__content__image__containerdos {
+    width: 100%;
+    text-align: justify; 
+    margin-left:0;
+    margin-bottom: 5;
+   
+  }
+  .accordion__content__textcuatro {
+       width: 100%;
+    text-align: justify;
+     margin-left:0;
+     margin-top: 10%;
+   
+  }
+  .accordion__content__imagemardos {
+   width: 80%;
+     margin-left:12%;
+  }
+
+  .accordion__content__imagemar {
+     width: 80%;
+
+  }
+}
+.accordion__content__text__titlemardos {
+    margin-top: 15px;
+  margin-left: 20px;
+}
+
+
+.accordion__content__text__horizontal-line {
+  border: none;
+  border-bottom: 1px solid var(--color-five);
+  margin-right: 2%;
+}
+
+.accordion__content__text__body {
+  margin-top: 2%;
+  padding-right: 5%;
+}
+.accordion__content__text__bodymar {
+  margin-top: 2%;
+  padding-right: 5%;
+    padding-left: 10%;
+}
+.accordion__content__text__bodymardos {
+  margin-top: 2%;
+
+    padding-left: 5%;
+}
+.accordion__content__text__bodymardosfin {
+  margin-top: 2%;
+margin-bottom: 2%;
+    padding-left: 5%;
+}
+@media (max-width: 900px){
+  .accordion {
+    border: 1px solid var(--color-five);
+  }
+  
+  .accordion-tab--status {
+    display: inline;
+  }
+  .accordion__content,
+  .accordion__label
+  {
+    order: initial;
+  }
+  
+  .accordion__content {
+    flex-direction: column;
+  }
+  
+  .accordion__label {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2em;
+    padding: 5% 6% 5% 6%;
+  }
+
+  .accordion__label:last-child {
+    background-color: magenta;
+  }
+
+  .accordion__content__image__container {
+    width: 100%;
+  }
+
+  .accordion__content__image {
+    padding: 0;
+    margin: 0;
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+  }
+
+  .accordion__content__text {
+    font-size: 0.9em;
+    margin: 4% 5% 4% 5%;
+  }
+
+  .accordion__content__text__title {
+    margin: 2% 0 2% 0;
+  }
+
+  .accordion__content__text__horizontal-line {
+    width: 100%;
+  }
+
+  .accordion input[type="radio"] + label span:after  {
+    content: '+';
+  }
+
+  .accordion input[type="radio"]:checked + label span:after  {
+    content: '—';
+  }
+
+  .accordion input[type="radio"]:checked + label {
+    border: none; 
+  }
+
+  .accordion input[type="radio"]:checked + label + .accordion {
+    border: none;  
+  }
+
+  .accordion input[type="radio"]:checked + label + .accordion__content {
+    border: none;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+.containerfot {
+
+  background: teal;
+  padding: 15px;
+}
+.containerfot img {
+  width: 100%;
+  display: block;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  transition: all 100ms ease-out;
+  padding-bottom: 15px;
+}
+.containerfot img:hover {
+  transform: scale(1.04);
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+
+
+
+.section-header {
+  text-align: center;
+  margin: 0 auto;
+  padding: 40px 0;
+  font: 300 60px 'Oswald', sans-serif;
+  letter-spacing: 6px;
+  color: #fff;
+}
+
+.contact-wrapper {
+  margin: 0 auto;
+  padding-top: 20px;
+  position: relative;
+  max-width: 800px;
+}
+
+/* Begin Left Contact Page */
+.form-horizontal {
+
+  max-width: 400px;
+  font-family: 'Lato';
+  font-weight: 400;
+}
+
+.form-control, textarea {
+  max-width: 400px;
+  color: black;
+  letter-spacing: 1px;
+}
+
+.send-button {
+
+  margin-top: 15px;
+ height: 34px;
+  overflow: hidden;
+  transition: all .2s ease-in-out;
+}
+
+.buttonh {
+
+
+  height: 34px;
+  transition: all .2s ease-in-out;
+}
+
+.send-text {
+  display: block;
+  margin-top: 10px;
+  font: 700 12px 'Lato', sans-serif;
+  letter-spacing: 2px;
+
+}
+
+.buttonh:hover {
+  transform: translate3d(0px, -29px, 0px);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans|Playfair+Display');
+/* background */
+body {
+  background-color: #abc1c3;
+}
+/* text */
+.pal {
+  font-family: 'Playfair Display', serif;
+  font-size: 160%;
+}
+.paltres {
+  font-family: 'Playfair Display';
+  font-size: 200%;
+  margin-left: 15%;
+  text-align: justify;
+}
+/* image */
+.cactus{
+  float: left;
+  height: 100%;
+}
+/* main container */
+.intro {
+   text-align: center;
+     align-items: center;
+     align-content: center;
+     align-self: center;
+   border-radius: 0.5rem;
+  position: relative;
+  width: 752px;
+  height: 500px;
+  left: 20%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+}
+/* text container */
+.bde{
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+/* border */
+.tit{
+  position: absolute;
+  width: 340px;
+  height: 460px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-width: 5px;
+  border-color: #F8C4D1;
+  border-style: solid;
+}
+/* containers */
+.perfect {
+  margin-left: 30px;
+  margin-top: 10%;
+  font-size: 34px;
+}
+.paldos {
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 10px;
+}
+
+
+@media (max-width: 900px){
+  .intro {
+height: 270px;
+    left: 0%;
+    width: 100%;
+     text-align: center;
+     align-items: center;
+     align-content: center;
+     align-self: center;
+
+  }
+
+  .cactus {
+    margin-left: -10%;
+    margin-top: 10%; 
+    width: 68%;
+    height: 90%;
+  }
+
+  .tit {
+
+    width: 75%;
+    height: 85%;
+     margin-left: 23%;
+  }
+
+  .perfect {
+    width: 100%;
+
+  }
+
+  .bde {
+    width: 100%;
+
+  }
+
+  .paldos {
+    width: 50%;
+    margin-left: 45%;
+  }
+
+  .pal {
+    font-size:95%;
+    margin-left: 27%;
+  }
+  .paltres {
+    font-size:100%;
+
+  }
+
+  .about__number {
+   font-size: 100%;
+    margin-left: 25%;
+  }
+  .about__ach {
+    font-size: 100%;
+    margin-left: 25%;
+  }
+
+}
+
+
+@media (max-width: 1200px){
+  .intro {
+height: 320px;
+    left: 0;
+    width: 105%;
+     text-align: center;
+     align-items: center;
+     align-content: center;
+     align-self: center;
+
+  }
+
+  .cactus {
+    margin-left: -10%;
+    margin-top: 7%; 
+    width: 68%;
+    height: 90%;
+  }
+
+  .tit {
+
+    width: 75%;
+    height: 90%;
+     margin-left: 23%;
+  }
+
+  .perfect {
+    width: 100%;
+
+  }
+
+  .bde {
+    width: 100%;
+
+  }
+
+  .paldos {
+    width: 50%;
+    margin-left: 45%;
+  }
+
+  .pal {
+    font-size:95%;
+    margin-left: 23%;
+  }
+  .paltres {
+    font-size:100%;
+
+  }
+
+  .about__number {
+   font-size: 100%;
+    margin-left: 25%;
+  }
+  .about__ach {
+    font-size: 100%;
+    margin-left: 25%;
+  }
+
+}
+@media (max-width: 900px){
+  .home__img {
+    
+    width: 55%;
+
+  }
+@media (max-width: 900px){
+  .av {
+    
+    width: 5%;
+
+  }
+   </style>
+
+    </head>
+    <body>
+         <div class="loader"><h1 class="carga">Bienvenida</h1></div>
+        <!--===== SCROLL TOP =====-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon'></i>
+        </a>
+        
+        <!--===== HEADER =====-->
+        <header class="l-header" id="header">
+            <nav class="nav bd-container" id="navbar" data-aos="fade-down">
+              <img class="av" src="avion.gif" width="3%"></img>
+                <a class="nav__logo">Paula Rodríguez</a>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"> <a href="#home" class="nav__link active--link">Inicio</a></li>
+                        <li class="nav__item"> <a href="#about" class="nav__link">Sobre mí</a></li>
+                        <li class="nav__item"> <a href="#services" class="nav__link">Servicios</a></li>
+                        <li class="nav__item"> <a href="#portfolio" class="nav__link">Portfolio</a></li>
+                        <li class="nav__item"> <a href="#contact" class="nav__link">Contacto</a></li>
+                    </ul>
+                </div>
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                 <span class="nav__toggle"id="nav-toggle"> 
+                <i class='bx bx-menu'></i></span>
+                </button>
+               
+                   
+ <div class="collapse navbar-collapse" id="collapsibleNavbar">
+ <ul class="navbar-nav">
+   <li class="nav-item">
+     <a class="nav-link" href="#home">Inicio</a>
+   </li>
+
+   <li class="nav-item">
+     <a class="nav-link" href="#about">Sobre mí</a>
+   </li>
+     <li class="nav-item">
+     <a class="nav-link" href="#services">Servicios</a>
+   </li>
+   <li class="nav-item">
+     <a class="nav-link" href="#portfolio">Portfolio</a>
+   </li>
+     <li class="nav-item">
+     <a class="nav-link" href="#contact">Contacto</a>
+   </li>
+ </ul>
+              
+            </nav>
+        </header>
+
+        <main class="l-main">
+        
+            <!--===== HOME =====-->
+           
+            <section class="home" id="home"> 
+            <div class="container-fluid">
+                <div class="home__container bd-container bd-grid" data-aos="fade-right" data-aos-delay="1200">
+                    <div class="home__data">
+                        <span class="home__greeting">Hola, mi nombre es</span>
+                        <h1 class="home__name">Paula Rodríguez</h1>
+                        <span class="home__professional">Comunicadora y periodista</span>
+                       
+                    </div>
+           
+                    <div class="home__social" data-aos="zoom-in" data-aos-delay="1500">
+                        <a href="https://www.facebook.com/paula.rodriguezchavez.775/" class="home__social-icon">
+                            <i class='bx bxl-facebook'></i>
+                        </a>
+                        <a href="https://instagram.com/paularc00?igshid=ass61wx8g7wg" class="home__social-icon">
+                            <i class='bx bxl-instagram'></i>
+                        </a>
+                        <a href="https://twitter.com/PaulaRCz?s=09" class="home__social-icon">
+                            <i class='bx bxl-twitter'></i>
+                        </a>
+                        
+                    </div>
+
+                    <div class="home__img" container-fluid>
+                        <img class="prese" src="pertres.jpeg" alt="yo" data-aos="zoom-out" >
+
+                    </div>
+
+                   
+                </div></div>
+            </section>
+        
+
+     
+
+            
+            <!--===== ABOUT =====-->
+            <div class="container-fluid text center">
+            <section class="about section bd-container" id="about" data-aos="fade-down">
+                <span class="section-subtitle">Mi historia</span>
+                <h2 class="section-title">Sobre mí</h2>
+                <div class="about__container bd-grid text center">
+                        <div class="about__data bd-grid text center">
+           <div class="container-fluid intro text-center">
+  <div class="text-container bde">
+    <!-- pink border -->
+    <div class="border tit"></div>
+    <!-- title -->
+    <div class="header-container perfect">
+    <p class="pal">Hola, soy</p>
+      </div>
+    <!-- paragraph -->
+    <div class="p-container paldos">
+      <p class="paltres">Una estudiante de doble grado en comunicación audiovisual y periodismo. <br>Me encanta escribir, dibujar, hacer fotografías y participar en proyectos creativos.</p>
+   
+                           
+                            <div container-fluid data-aos="fade-down" data-aos-delay="1200">
+                                <span class="about__number">3</span>
+                                <span class="about__ach">Años de experiencia</span>
+                            </div>
+                            <div container-fluid data-aos="fade-down" data-aos-delay="1400">
+                                <span class="about__number">2</span>
+                                <span class="about__ach">Proyectos en marcha</span>
+                            </div>
+                            
+                         </div> 
+                        </div>
+                          <!-- image -->
+ <img class="cactus" data-aos="zoom-in"  data-aos-delay="1200" src="yo.png">
+
+                         </div> 
+  </div>
+</div>
+                </div>
+
+            </section>
+
+            <!--===== QUALIFICATION =====-->
+            <section class="quali section bd-container" data-aos="slide-down">
+                <span class="section-subtitle">Experiencia y educación</span>
+                <h2 class="section-title">Cualificación</h2>
+
+                <div class="quali__container bd-grid" >
+                    <div class="quali__content">
+                        <h2 class="quali__title">
+                            <i class='bx bxs-briefcase-alt quali__title-icon' ></i>
+                            Experiencia de trabajo
+                        </h2>
+
+                        <div class="bd-grid">
+                            <div class="quali__data">
+                                <h3 class="quali__area">Coordinadora jefe de revista </h3>
+                                <div class="quali__box">
+                                    <span class="quali__work">
+                                        <i class='bx bx-briefcase-alt quali__icon' ></i>
+                                        VAVEL 
+                                    </span>
+                                    <span class="quali__work">
+                                        <i class='bx bx-calendar-alt quali__icon' ></i>
+                                        Septiembre 2019 - Enero 2021
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="quali__data">
+                                <h3 class="quali__area">Redactora y fotógrafa</h3>
+                                <div class="quali__box">
+                                    <span class="quali__work">
+                                        <i class='bx bx-briefcase-alt quali__icon' ></i>
+                                        Festival de cine de Sevilla y Festival de cine de Málaga
+                                    </span>
+                                    <span class="quali__work">
+                                        <i class='bx bx-calendar-alt quali__icon' ></i>
+                                        Octubre 2019 - Septiembre 2020
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="quali__content" data-aos="flipe-left">
+                        <h2 class="quali__title">
+                            <i class='bx bx-library quali__title-icon' ></i>
+                              Educación
+                        </h2 >
+
+                        <div class="bd-grid">
+                            <div class="quali__data">
+                                <h3 class="quali__area">Doble grado en periodismo y comunicación audiovisual</h3>
+                                <div class="quali__box">
+                                    <span class="quali__work">
+                                        <i class='bx bxs-book quali__icon' ></i>
+                                        Universidad de Sevilla
+                                    </span>
+                                    <span class="quali__work">
+                                        <i class='bx bx-calendar-alt quali__icon' ></i>
+                                        Septiembre 2018 - 2025
+                                    </span>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="quali__data" data-aos="flipe-left">
+                                <h3 class="quali__area">Cursos en periodismo de datos y posicionamiento web</h3>
+                                <div class="quali__box">
+                                    <span class="quali__work">
+                                        <i class='bx bxs-book quali__icon' ></i>
+                                        CEF - Escuela de Negocios
+                                    </span>
+                                    <span class="quali__work">
+                                        <i class='bx bx-calendar-alt quali__icon' ></i>
+                                        Febrero 2019 - Marzo 2020
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                                                       
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--===== SERVICES =====-->
+            <section class="services section bd-container" id="services">
+                <span class="section-subtitle">Qué puedo ofrecer</span>
+                <h2 class="section-title">Servicios</h2>
+                  
+                 <div class="services__container bd-grid" data-aos="flip-left" >
+               
+                     <div class="services__data" >
+                        <i class='bx bxs-palette services__icon'></i>
+                        <h3 class="services__title">Diseñadora y creadora artística</h3>
+                        <p class="services__desc">Experiencia en el departamento de arte, fotografía y guion audiovisual.</p>
+                        <a href="#portfolio" class="button">Ver más</a>
+                     </div>
+                  
+                    
+                     <div class="services__data" >
+                        <i class='bx bx-laptop services__icon'></i>
+                        <h3 class="services__title">Periodista</h3>
+                        <p class="services__desc">Servicios para cualquier medio audiovisual ya sea radio, televisión o prensa.</p>
+                        <a href="#portfolio" class="button">Ver más</a>
+                     </div>
+                    
+                 </div>
+
+            </section>
+         
+
+            <!--===== PORTFOLIO =====-->
+            <section class="portfolio section bd-container" id="portfolio">
+                <span class="section-subtitle">Mis proyectos recientes</span>
+                <h2 class="section-title">Portfolio</h2>
+          
+<div class="accordion container-fluid">
+
+            <input class="accordion__radio" type="radio" name="accordion-tabs" id="tab-one" checked/>
+            <label class="accordion__label" for="tab-one">Periodismo
+              <span class="accordion-tab--status"></span>
+            </label>
+
+            <div class="accordion__content">
+
+              <div class="accordion__content__text">
+                       
+                  <div class="portfolio__container bd-grid">
+                    <div class="portfolio__content mix web">
+                        <a href="https://vavel.media/es/2020/11/18/cine/1047276-la-vida-era-eso-la-fragilidad-de-la-mujer-orquesta.html" class=""><img src="vida.jpg"></a>
+                        <div class="portfolio__data">
+                            <span class="portfolio__subtitle">Crítica</span>
+                            <h2 class="portfolio__title">"La vida era eso": la fragilidad de la mujer orquesta</h2>
+                            <a href="https://vavel.media/es/2020/11/18/cine/1047276-la-vida-era-eso-la-fragilidad-de-la-mujer-orquesta.html" class="button button-link">Leer</a>
+                        </div>
+                        
+                    </div>
+                    <div class="portfolio__content mix web">
+                        <a href="https://vavel.media/es/2020/09/03/cine/1035087-eso-que-tu-me-das-una-leccion-de-vida-del-ex-vocalista-pau-dones.html" class=""><img src="meda.jpg"></a>
+                        <div class="portfolio__data">
+                            <span class="portfolio__subtitle">Crítica</span>
+                            <h2 class="portfolio__title">"Eso que tú me das": una lección de vida del ex vocalista Pau Donés</h2>
+                            <a href="https://vavel.media/es/2020/09/03/cine/1035087-eso-que-tu-me-das-una-leccion-de-vida-del-ex-vocalista-pau-dones.html" class="button button-link">Leer</a>
+                        </div>
+                        
+                    </div>
+                    <div class="portfolio__content mix ux">
+                        <a href="https://vavel.media/es/2020/04/02/cine/1018602-critica-el-hoyo-el-exito-espanol-de-la-cuarentena.html" class=""><img src="hoyo.jpg" alt="" class="portfolio__img"></a>
+                        <div class="portfolio__data">
+                            <span class="portfolio__subtitle">Crítica</span>
+                            <h2 class="portfolio__title">El Hoyo, el éxito español de la cuarentena</h2>
+                            <a href="https://vavel.media/es/2020/04/02/cine/1018602-critica-el-hoyo-el-exito-espanol-de-la-cuarentena.html" class="button button-link">Leer</a>
+                        </div>
+                        
+                    </div>
+                    <div class="portfolio__content mix ux">
+                        <a href="https://vavel.media/es/2020/08/17/cine/1032787-entrevista-alexandra-masangkay-espero-no-unicamente-acceder-a-un-personaje-racial-sino-a-cualquier-mujer-que-tenga-un-rango-de-edad-similar-a-la-mia.html" class=""><img src="alex.jpg"></a>
+                        <div class="portfolio__data">
+                            <span class="portfolio__subtitle">Entrevista</span>
+                           <h2 class="portfolio__title">"Espero no tener que acceder únicamente a un personaje racial"</h2>
+                            <a href="https://vavel.media/es/2020/08/17/cine/1032787-entrevista-alexandra-masangkay-espero-no-unicamente-acceder-a-un-personaje-racial-sino-a-cualquier-mujer-que-tenga-un-rango-de-edad-similar-a-la-mia.html" class="button button-link">Leer</a>
+                        </div>
+                        
+                    </div>
+                    <div class="portfolio__content mix app">
+                        <a href="https://vavel.media/es/2020/11/16/cine/1047008-entrevista-pablo-maqueda-la-pelicula-me-ha-hecho-aprender-a-disfrutar-el-camino-no-la-meta.html" class=""><img src="pablo.png"></a>
+                        <div class="portfolio__data">
+                            <span class="portfolio__subtitle">Entrevista</span>
+                            <h2 class="portfolio__title">"La película me ha hecho aprender a disfrutar el camino, no la meta"
+                            </h2>
+                            <a href="https://vavel.media/es/2020/11/16/cine/1047008-entrevista-pablo-maqueda-la-pelicula-me-ha-hecho-aprender-a-disfrutar-el-camino-no-la-meta.html" class="button button-link">Leer</a>
+                        </div>
+                        
+                    </div>
+                    <div class="portfolio__content mix app">
+                        <a href="https://vavel.media/es/2020/08/23/television/1033570-entrevista-gonzalo-pendolema-de-mi-podeis-esperar-las-risas-de-siempre-y-divertirme-mucho-mas.html" class=""><img src="gonz.jpeg"></a>
+                        <div class="portfolio__data">
+                            <span class="portfolio__subtitle">Entrevista</span>
+                            <h2 class="portfolio__title">"De mi podéis esperar las risas de siempre y divertirme mucho más"</h2>
+                            <a href="https://vavel.media/es/2020/08/23/television/1033570-entrevista-gonzalo-pendolema-de-mi-podeis-esperar-las-risas-de-siempre-y-divertirme-mucho-mas.html" class="button button-link">Leer</a>
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
+            </div>
+            <input class="accordion__radio" type="radio" name="accordion-tabs" id="tab-two" />
+            <label class="accordion__label" for="tab-two">Ilustraciones
+              <span class="accordion-tab--status"></span>
+            </label>
+            <div class="accordion__content">
+             
+              <div class="accordion__content__text">
+            
+
+<div class="container">
+  <div class="mySlides">
+    <div class="numbertext">1 / 6</div>
+    <img src="mariA.png" style="width:70%; margin-left: 15%;">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 6</div>
+    <img src="boy.png" style="width:70%; margin-left: 15%;">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">3 / 6</div>
+    <img src="par.png" style="width:70%; margin-left: 15%;">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">4 / 6</div>
+    <img src="red.png" style="width:70%; margin-left: 15%;">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">5 / 6</div>
+    <img src="tarde.png" style="width:70%; margin-left: 15%;">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">6 / 6</div>
+    <img src="paw.png" style="width:70%; margin-left: 15%;">
+  </div>
+    
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+
+  <div class="caption-container">
+    <p id="caption"></p>
+  </div>
+
+ 
+</div>
+
+              </div>
+            </div>
+            <input class="accordion__radio" type="radio" name="accordion-tabs" id="tab-three" />
+
+            <label class="accordion__label" for="tab-three">Cortometrajes
+              <span class="accordion-tab--status"></span>
+            </label>
+            <div class="accordion__content">
+              <div class="accordion__content__image__containerdos">
+                <img class="accordion__content__imagemar" src="cotard.jpeg" alt="placeholder alt text" />
+
+                <h3 class="accordion__content__text__titlemar">
+                  COTARD
+                  <hr class="accordion__content__text__horizontal-linemar" />
+                </h3>
+                <p class="accordion__content__text__bodymar">Cotard es un cortometraje de Apeiron Producciones.
+                </p>
+                <p class="accordion__content__text__bodymar">Por alguna razón que desconoce, Adán, un joven de 25 años se levanta cada mañana pensando que ha dejado de vivir. 
+                      </p>  
+                       <p class="accordion__content__text__bodymar">
+                    <br>Ante la incomprensión de sus padres y de su amiga Carla, el chico intentará por todos los medios volver a sentir aunque esto lo lleve a experimentar sensaciones un tanto perturbadoras.
+                    </p>
+               
+              </div>
+
+              <div class="accordion__content__textcuatro">
+                
+                 <img class="accordion__content__imagemardos" src="metanoia.jpeg" alt="placeholder alt text" />
+                 <h3 class="accordion__content__text__titlemardos">
+                  METANOIA
+                  <hr class="accordion__content__text__horizontal-line" />
+                </h3>
+                <p class="accordion__content__text__bodymardos">Metanoia es un cortometraje de Octo Producciones.
+                </p>
+                <p class="accordion__content__text__bodymardosfin">Bruno es a los ojos de todos, un niño normal. Sin embargo, su vida es un tanto peculiar: un cuervo lo persigue a todos lados y mil pesadillas lo atormentan cada noche. 
+                    <br>
+                    <br>
+                    En una de esas noches nota la presencia de una luz que sale del interior de su armario. Movido por la curiosidad, se adentra en él y llega a una oscura habitación en la que le espera una Bruja. Dentro, Bruno tomará una decisión que marcará la dirección de su vida.
+                </p>
+              </div>
+            </div>
+
+             
+         
+            <input class="accordion__radio" type="radio" name="accordion-tabs" id="tab-four" />
+            <label class="accordion__label" for="tab-four">Fotografía
+              <span class="accordion-tab--status"></span>
+            </label>
+            <div class="accordion__content">
+             
+              <div class="accordion__content__text">
+                <div class="containerfot container-fluid text-center">
+                    <div class="row">
+            <div class="col">   <img src="dos.jpeg" width="100%"> </div>    <div class="col"> <img src="cuatro.jpeg" width="100%"> </div>
+        </div>
+            <div class="row">
+                <div class="col"> <img src="uno.jpeg" width="100%"> </div>
+     <div class="col"> <img src="tres.jpeg" width="100%"> </div>
+ </div>
+ <div class="row">
+                       <div class="col"> <img src="cinco.jpeg" width="100%"> </div>
+     <div class="col"> <img src="seis.jpeg" width="100%"> </div>
+ </div>
+ <div class="row">
+              <div class="col">   <img src="siete.jpeg" width="100%"></div>
+    <div class="col"> <img src="ocho.jpeg" width="100%">  </div>
+</div>
+    </div>  
+              </div>
+            </div>
+          </div>
+  </section>
+
+          
+            <!--===== CONTACTME =====-->
+            <section class="contact section bd-container container-fluid text-center" id="contact" data-aos="zoom-out">
+                <span class="section-subtitle">Dejame ayudarte en tus proyectos</span>
+                <h2 class="section-title">Contacta conmigo</h2>
+             
+                <section id="contact">
+  <div class="col">
+  <div class="contact-wrapper">
+
+    
+    <form id="contact-form" class="form-horizontal container-fluid text-center" role="form">
+       
+      <div class="form-group">
+        <div class="col-sm-12">
+             <form action="/action_page.php">
+          <input type="text" class="form-control" id="name" placeholder="NAME" name="name" value="" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-12">
+          <input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="" required>
+        </div>
+      </div>
+
+      <textarea class="form-control" rows="10" placeholder="MESSAGE" name="message" required></textarea>
+      
+      <button class="btn btn-primary send-button container-fluid text-center" id="submit" type="submit" value="SEND">
+        <div class="buttonh">
+          <i class="fa fa-paper-plane"></i><span class="send-text">Enviar</span>
+        </div>
+      
+      </button>
+      </div>
+    </form>
+
+    
+            </section>
+        </main>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <div class="footer__container bd-container">
+                <h1 class="footer__title">Paula Rodríguez</h1>
+                <p class="footer__desc">¡Gracias por tu interés en mi trabajo!</p>
+
+                <div class="footer__social">
+                     <div class="home__social">
+                        <a href="https://www.facebook.com/paula.rodriguezchavez.775/" class="home__social-icon">
+                            <i class='bx bxl-facebook'></i>
+                        </a>
+                        <a href="https://instagram.com/paularc00?igshid=ass61wx8g7wg" class="home__social-icon">
+                            <i class='bx bxl-instagram'></i>
+                        </a>
+                        <a href="https://twitter.com/PaulaRCz?s=09" class="home__social-icon">
+                            <i class='bx bxl-twitter'></i>
+                        </a>
+                        
+                    </div>
+                        </footer>
+        
+        <!-- ===== MIXITUP FILTER ===== -->
+        <script type="text/javascript">
+            document.querySelector('#contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    e.target.elements.name.value = '';
+    e.target.elements.email.value = '';
+    e.target.elements.message.value = '';
+  });
+
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js" integrity="sha512-nKZDK+ztK6Ug+2B6DZx+QtgeyAmo9YThZob8O3xgjqhw2IVQdAITFasl/jqbyDwclMkLXFOZRiytnUrXk/PM6A==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.js" integrity="sha512-fuxK9KrfYYxsXOm+VTYLEX3vOKymX2CDP+X1q0vsTwe9LPyJBSC3LXPu79ZNZiNCFrSzzMklmp5bU9Da/1TQEw==" crossorigin="anonymous"></script>
+        <script src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+          <!-- ===== Mixitup ===== -->
+         
+        <!-- ===== SWIPER JS ===== -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        
+        <!-- ===== GSAP ===== -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+        
+        <!--===== MAIN JS =====-->
+        <script src="js/content.js"></script>
+
+
+         
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+
+          <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+ <script>
+ AOS.init();
+ </script>
+    </body>
+</html>
+
+
 
 #
 # Flags below are optional
